@@ -15,7 +15,7 @@ public class Mp3Tools {
 
 	public static void main(String[] args) {
 
-		String dir="C:\\Users\\join0\\Downloads";
+		String dir="C:\\Users\\join0\\Downloads\\";
 		String destDir="C:\\Users\\join0\\Downloads\\dest\\";
 		File parent=new File(dir);
 		File[] files=parent.listFiles();
@@ -38,11 +38,11 @@ public class Mp3Tools {
 					//id3v1Tag.setTrack("5");
 					id3v1Tag.setArtist("纪涵邦");
 					//把mp3标题修改成与文件名一致,在音乐播放器列表中显示的是title,而不是文件名，可以根据自己的需求修改title
-					id3v1Tag.setTitle(file.getName());
+					id3v1Tag.setTitle("汉朝那些事_"+file.getName());
 					id3v1Tag.setAlbum("汉朝那些事");
 					id3v1Tag.setYear("2019");
 					id3v1Tag.setGenre(12);
-					//id3v1Tag.setComment("Some comment");
+					id3v1Tag.setComment("modify by mp3agic");
 					mp3file.save(destDir+file.getName());
 
 					//System.out.println(file.getName()+ " process success: ");

@@ -40,11 +40,24 @@
             <version>1.2.58</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+
         <!-- 一个修改mp3文件属性信息工具库 -->
         <dependency>
             <groupId>com.mpatric</groupId>
             <artifactId>mp3agic</artifactId>
             <version>0.9.1</version>
+        </dependency>
+
+        <!-- jBrowserDriver是一款采用纯Java编写的无图形化浏览器，基于WebKit，和Selenium兼容。 -->
+        <dependency>
+            <groupId>com.machinepublishers</groupId>
+            <artifactId>jbrowserdriver</artifactId>
+            <version>1.1.0-RC1</version>
         </dependency>
 
     </dependencies>

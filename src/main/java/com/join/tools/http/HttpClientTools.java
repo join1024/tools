@@ -125,6 +125,32 @@ public class HttpClientTools {
         return retstr;
     }
 
+    public static ByteResponse doGetToByte(String url) throws IOException {
+        if (TextUtils.isEmpty(url)) {
+            return null;
+        }
+
+        ByteResponse br=null;
+        HttpGet get = new HttpGet(url);
+
+        int tout=500000;
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(tout).setConnectionRequestTimeout(tout)
+                .setSocketTimeout(tout).build();
+        get.setConfig(requestConfig);
+
+        try (CloseableHttpResponse response = getHttpClient().execute(get)) {
+            HttpEntity entity = response.getEntity();
+
+            if (null != entity) {
+                String contentType=entity.getContentType()!=null ? entity.getContentType().getValue();
+                br=new ByteResponse(contentType,entity.getContentLength(),EntityUtils.toByteArray(entity));
+            }
+            EntityUtils.consume(entity);
+        }
+        return br;
+    }
+
     /**
      * 下载
      *
