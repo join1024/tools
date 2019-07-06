@@ -2,7 +2,7 @@
  * 
  */
 
-package com.join.tools;
+package com.join.tools.http;
 
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
@@ -143,7 +143,7 @@ public class HttpClientTools {
             HttpEntity entity = response.getEntity();
 
             if (null != entity) {
-                String contentType=entity.getContentType()!=null ? entity.getContentType().getValue();
+                String contentType=entity.getContentType()!=null ? entity.getContentType().getValue() : null;
                 br=new ByteResponse(contentType,entity.getContentLength(),EntityUtils.toByteArray(entity));
             }
             EntityUtils.consume(entity);

@@ -1,9 +1,9 @@
-package com.join.tools;
+package com.join.tools.scratch.download;
 
-import org.apache.commons.io.input.ReaderInputStream;
+import com.join.tools.http.ByteResponse;
+import com.join.tools.http.HttpClientTools;
 
 import java.io.*;
-import java.net.ResponseCache;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,20 +16,22 @@ import java.util.stream.Collectors;
 public class Test {
 	public static void main(String[] args) throws IOException {
 
-		List<String> list=list("C:\\Users\\join0\\Desktop\\素材");
+		String path=Test.class.getResource("/scratch").getPath();
+		List<String> list= md5List(path);
 
-		System.out.println(list.size());
 		list.forEach(System.out::println);
+		System.out.println(list.size());
 
-		list=list.stream().limit(100).collect(Collectors.toList());
+		//测试10个
+		list=list.stream().limit(10).collect(Collectors.toList());
 
 		String urlPath="https://assets.scratch.mit.edu/internalapi/asset/${md5}/get/";
 
-		for (String s : list) {
+		for (String md5 : list) {
 
-			urlPath=urlPath.replace("${md5}",s);
+			urlPath=urlPath.replace("${md5}",md5);
 			System.out.println(urlPath);
-			ByteResponse response=HttpClientTools.doGetToByte(urlPath);
+			ByteResponse response= HttpClientTools.doGetToByte(urlPath);
 
 			System.out.println("contentType="+response.getContentType()
 					+" , length="+response.getBytes().length
@@ -37,11 +39,9 @@ public class Test {
 
 		}
 
-		HttpClientTools.doGetToByte("https://assets.scratch.mit.edu/internalapi/asset/83a9787d4cb6f3b7632b4ddfebf74367.wav/get/");
-
 	}
 
-	private static List<String> list(String dirPath) {
+	private static List<String> md5List(String dirPath) {
 		List<String> list=new ArrayList<>();
 		File parent =new File(dirPath);
 		File[] files=parent.listFiles();
