@@ -19,7 +19,7 @@ public class Mp3Tools {
 		String destDir="C:\\Users\\join0\\Downloads\\dest\\";
 		File parent=new File(dir);
 		File[] files=parent.listFiles();
-
+		System.out.println("===========");
 		for (File file : files) {
 			if(file.getName().endsWith(".mp3")){
 				try {
